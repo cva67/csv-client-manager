@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Imports\ClientsImport;
 use App\Models\ImportJob;
+use Maatwebsite\Excel\Excel;
 
 class ImportJobService
 {
@@ -14,14 +16,20 @@ class ImportJobService
         //
     }
 
-    public function store(string $filename, string $origialpath) : ImportJob
+    public function import($file) : ImportJob
     {
-        $importJob = ImportJob::create([
-            'filename'=>$filename,
-            'status' => 'pending'
-        ]);
+        $totalRows = count(file($file->getRealPath())) - 1;
 
-        //job queues process
+        $importJob = ImportJob::create([
+            'filename'=>$file->getClientOriginalName(),
+            'status' => 'pending',
+            'total_rows' => $totalRows
+        ]);
+       
+        Excel::queueImport(
+            new ClientsImport($importJob),
+            $file
+        );
 
         return $importJob;
 

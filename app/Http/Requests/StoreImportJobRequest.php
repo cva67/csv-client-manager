@@ -23,7 +23,7 @@ class StoreImportJobRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file_name'=>'required|string|max:255'
+            'file_name'=>'required|file|mimes:csv,txt'
         ];
     }
 }
