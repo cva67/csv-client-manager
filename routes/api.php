@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::prefix('imports')->group(function () {
-
     Route::post('/', [ClientCsvFileController::class, 'store']);
+    Route::get('/{importJob}/duplicate-groups', [ClientCsvFileController::class, 'duplicatesInGroup']);
+    Route::get('/duplicates', [ClientCsvFileController::class, 'duplicates']);
+    Route::put('/clients/{id}', [ClientCsvFileController::class, 'update']);
+    Route::get('/{importJob}/export',[ClientCsvFileController::class, 'export']);
 });
