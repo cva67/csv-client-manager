@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ImportJob extends Model
 {
+    
     protected $fillable = ['file_name','total_rows','success_rows',
     'failed_rows','duplicate_rows','status'];
 

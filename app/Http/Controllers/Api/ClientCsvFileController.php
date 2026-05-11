@@ -88,7 +88,7 @@ public function export(Request $request,ImportJob $importJob) {
             $importJob->id,
             $filter
         ),
-        "clients-{$filter}.csv"
+        "{$importJob->file_name}-{$filter}.csv"
     );
 }
 }

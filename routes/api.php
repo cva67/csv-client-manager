@@ -13,5 +13,9 @@ Route::prefix('imports')->group(function () {
     Route::get('/{importJob}/duplicate-groups', [ClientCsvFileController::class, 'duplicatesInGroup']);
     Route::get('/duplicates', [ClientCsvFileController::class, 'duplicates']);
     Route::put('/clients/{id}', [ClientCsvFileController::class, 'update']);
-    Route::get('/{importJob}/export',[ClientCsvFileController::class, 'export']);
+    
+});
+
+Route::prefix('client')->group(function () {
+    Route::get('/{importJob}/export', [ClientCsvFileController::class, 'export']);
 });
